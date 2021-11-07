@@ -54,7 +54,7 @@ $(document).ready(() => {
 	$("button.report").click(() => {
 		grecaptcha.ready(async () => {
 			console.log("here");
-			let token = await grecaptcha.execute("6LcdheoUAAAAAOxUsM86wQa5c_wiDak2NnMIzO7Y", { action: "report" });
+			let token = await grecaptcha.execute("6LejJMscAAAAAH38ZmF1iIpcKD94XjjGqJzidaYu", { action: "report" });
 			console.log("token", token);
 			$("#report-form [name=token]").val(token);
 			$("#report-form").submit();

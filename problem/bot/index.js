@@ -3,7 +3,7 @@ const mysql = require("mysql");
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 
-const secret = "contrived";
+const secret = "fakesecret";
 const username = "admin_" + process.env["HOSTNAME"];
 const password = crypto.createHmac("sha256", secret).update(process.env["HOSTNAME"]).digest("hex").substring(0, 24);
 
@@ -14,17 +14,18 @@ function sleep(time) {
 }
 
 async function run() {
-	let extension = "/ublock/uBlock0.chromium";
+	//Catalog is very insecure because of this extension, we are not goint to make that mistake again
+	// let extension = "/ublock/uBlock0.chromium";
 	let baseUrl = process.env.BASE_URL;
 
 	while (true) {
 		console.log("Setting up...");
 		const browser = await puppeteer.launch({
 			headless: false,
-			executablePath: "/usr/bin/chromium-browser",
-			args: [
-				`--disable-extensions-except=${extension}`,
-				`--load-extension=${extension}`
+
+			executablePath: "/chrome-linux/chrome",
+			args:[
+				'--js-flags="--jitless --noexpose_wasm"', //hehe No ndayz
 			]
 		});
 
@@ -32,6 +33,8 @@ async function run() {
 			console.log("\n".repeat(8));
 			console.log("Opening page...");
 			const page = await browser.newPage();
+			await page.setViewport({ width: 1366, height: 768});
+
 			console.log("Navigating...");
 			await page.goto(baseUrl);
 			console.log("Waiting for login...");
@@ -52,13 +55,15 @@ async function run() {
 
 			if (await page.$("a.issue-pending-approval") === null) {
 				console.log("No pending issue found, sleeping and reseting...");
-				await sleep(3000);
+				await sleep(10000);
 			} else {
 				console.log("About to click on the link!");
 				page.on("request", (req) => console.log(req.url()));
 				await Promise.all([
 					page.click("a.issue-pending-approval"),
-					page.waitForNavigation({ timeout: 30000, waitUntil: "networkidle0" })
+					page.waitForNetworkIdle({idleTime: 3000, timeout: 60000})
+
+
 				]);
 				console.log("RESOLVED");
 				// console.log(await page.evaluate(() => document.body.innerHTML));

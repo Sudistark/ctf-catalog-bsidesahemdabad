@@ -43,11 +43,21 @@ SELECT
 FROM
 	user;
 
+INSERT INTO issue (author_id, draft, title, content, image)
+SELECT
+	id,
+	false,
+	'Plaid Comics No. 1',
+	'The flag is https://www.youtube.com/watch?v=dQw4w9WgXcQ, jk id=4 is flag',
+	'https://previews.123rf.com/images/roywylam/roywylam1505/roywylam150500001/39898173-checkered-flag-chequered-flag.jpg'
+FROM
+	user;
+
 INSERT INTO issue (author_id, title, content, image)
 SELECT
 	id,
-	'Plaid Comics No. 1',
-	'The flag is PCTF{U8L0CK_MOR3_L1KE_UW0TM8_4A4C05CE}.',
+	'BsidesA Comics No. 1',
+	'The flag is NEKO{THIS_IS_FAKE_FLAG}',
 	'https://previews.123rf.com/images/roywylam/roywylam1505/roywylam150500001/39898173-checkered-flag-chequered-flag.jpg'
 FROM
 	user;

@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers" nonce="<?php echo $nonce; ?>" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" nonce="<?php echo $nonce; ?>"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.7.0/jquery.lettering.min.js" nonce="<?php echo $nonce; ?>"></script>
-	<script src="https://www.google.com/recaptcha/api.js?render=6LcdheoUAAAAAOxUsM86wQa5c_wiDak2NnMIzO7Y" nonce="<?php echo $nonce; ?>"></script>
+	<script src="https://www.google.com/recaptcha/api.js?render=6LejJMscAAAAAH38ZmF1iIpcKD94XjjGqJzidaYu" nonce="<?php echo $nonce; ?>"></script>
 	<script src="/js/main.js" nonce="<?php echo $nonce; ?>"></script>
 </head>
 <body>
